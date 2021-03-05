@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), OnCallListener<Contact> {
     val packagedata: ArrayList<String> = ArrayList()
     private val PERMISSIONS_REQUEST_READ_CONTACTS = 100
     var checkResume = false
+    var checklist = ArrayList<String>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -165,7 +166,10 @@ class MainActivity : AppCompatActivity(), OnCallListener<Contact> {
                                     ContactsContract.CommonDataKinds.Phone.NUMBER
                                 )
                             )
-                            contacts.add(Contact(name, phoneNumValue))
+                            if(!checklist.contains(phoneNumValue)){
+                                checklist.add(phoneNumValue)
+                                contacts.add(Contact(name, phoneNumValue))
+                            }
                         }
                     }
                     cursorPhone.close()
